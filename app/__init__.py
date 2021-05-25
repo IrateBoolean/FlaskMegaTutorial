@@ -7,6 +7,7 @@ from logging.handlers import RotatingFileHandler
 from logging.handlers import SMTPHandler
 import logging
 import os
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,7 +15,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
-
+mail = Mail(app)
 if not app.debug or True:
     if app.config['MAIL_SERVER']:
         auth = None
